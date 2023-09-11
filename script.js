@@ -1,6 +1,12 @@
 // Assigned code.
-Btn = document.querySelector("#generateBtn");
-var input;
+// Defining character sets for each criteria type.
+const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+const numberChars = '0123456789';
+const symbolChars = '!@#$%^&*()_-+=<>?';
+const generateBtn = document.querySelector("#generateBtn");
+
+var lengthInput;
 var includeNumbers = document.querySelector("#includeNumbers");
 var includeSymbols = document.querySelector("#includeSymbols");
 var includeUppercase = document.querySelector("#includeUppercase");
@@ -17,97 +23,90 @@ function writePassword() {
 generateBtn.addEventListener('click', writePassword);
 
 // Prompt function for password criteria.
-function getPasswordCriteria(){
+function generatePassword() {
 
-// Prompt for password's length.
-do {
-  input = prompt('Please enter your preferred password length (8 - 128 Characters):');
-  lengthInput = parseInt(input);
-    if (isNaN(lengthInput)) {
-    alert('Invalid input! Please enter a valid number.'); }
-     else if (lengthInput < 8 || lengthInput > 128) {
-       alert('Invalid password length! Please enter a number between 8 and 128.');
-      }
-} while (isNaN(lengthInput) || lengthInput < 8 || lengthInput > 128);
-
-// Prompt for uppercase letters.
-do {
-  input = prompt('Would you like to include uppercase letters? (Enter Y for "Yes", or N for "No")').toUpperCase();
-  includeUppercase = input === 'Y';
-    if (!includeUppercase && input !== 'N') {
-    alert('Invalid input. Please enter Y for "Yes" or N for "No".'); 
+  // Prompt for password's length.
+  do {
+    input = prompt('Please enter your preferred password length (8 - 128 Characters):');
+    lengthInput = parseInt(input);
+      if (isNaN(lengthInput)) {
+      alert('Invalid input! Please enter a valid number.');
+      return
+    } else if (lengthInput < 8 || lengthInput > 128) {
+        alert('Invalid password length! Please enter a number between 8 and 128.');
+        return
     }
-} while (input !== 'Y' && input !== 'N');
+  } while (isNaN(lengthInput) || lengthInput < 8 || lengthInput > 128);
 
-// Prompt for lowercase letters.
-do {
-  input = prompt('Would you like to include lowercase letters? (Enter Y for "Yes", or N for "No")').toLowerCase();
-  includeLowercase = input === 'y';
-    if (!includeLowercase && input !== 'n') {
-    alert('Invalid input. Please enter Y for "Yes", or N for "No".');
+  // Prompt for uppercase letters.
+  do {
+    input = prompt('Would you like to include uppercase letters? (Enter Y for "Yes", or N for "No")').toUpperCase();
+    includeUppercase = input === 'Y';
+      if (!includeUppercase && input !== 'N') {
+      alert('Invalid input. Please enter Y for "Yes" or N for "No".'); 
+      return
     }
-} while (input !== 'y' && input !== 'n');
+  } while (input !== 'Y' && input !== 'N');
 
-// Prompt for including numbers.
-do {
-  input = prompt('Would you like to include numbers? (Enter Y for "Yes", or N for "No")').toLowerCase();
-  includeNumbers = input === 'y';
-    if (!includeNumbers && input !== 'n') {
-    alert('Invalid input. Please enter Y for "Yes", or N for "No".');
+  // Prompt for lowercase letters.
+  do {
+    input = prompt('Would you like to include lowercase letters? (Enter Y for "Yes", or N for "No")').toLowerCase();
+    includeLowercase = input === 'y';
+      if (!includeLowercase && input !== 'n') {
+      alert('Invalid input. Please enter Y for "Yes", or N for "No".');
+      return
     }
-} while (input !== 'y' && input !== 'n');
+  } while (input !== 'y' && input !== 'n');
 
-// Prompt for including symbols.
-do {
-  input = prompt('Would you like to include symbols? (Enter Y for "Yes", or N for "No")').toLowerCase();
-  includeSymbols = input === 'y';
-    if (!includeSymbols && input !== 'n') {
-    alert('Invalid input. Please enter Y for "Yes", or N for "No".');
+  // Prompt for including numbers.
+  do {
+    input = prompt('Would you like to include numbers? (Enter Y for "Yes", or N for "No")').toLowerCase();
+    includeNumbers = input === 'y';
+      if (!includeNumbers && input !== 'n') {
+      alert('Invalid input. Please enter Y for "Yes", or N for "No".');
+      return
     }
- } while (input !== 'y' && input !== 'n');
+  } while (input !== 'y' && input !== 'n');
 
-  var password = generatePassword(lengthInput, includeUppercase, includeLowercase, includeNumbers, includeSymbols);
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
-   
-// Function to generate password based on the criteria listed.
-function generatePassword(length, includeUppercase, includeLowercase, includeNumbers, includeSymbols) {
-
-// Defining character sets for each criteria type.
-  const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
-  const numberChars = '0123456789';
-  const symbolChars = '!@#$%^&*()_-+=<>?';
-
-// An empty string used to store characters used for password.
-   let validChars = '';
-   let password = '';
-
-// Adding charsets to the validChars string, based on the selected password criteria.
-   if (includeUppercase) {
-     validChars += uppercaseChars;
+  // Prompt for including symbols.
+  do {
+    input = prompt('Would you like to include symbols? (Enter Y for "Yes", or N for "No")').toLowerCase();
+    includeSymbols = input === 'y';
+      if (!includeSymbols && input !== 'n') {
+      alert('Invalid input. Please enter Y for "Yes", or N for "No".');
+      return
     }
-   if (includeLowercase) {
-     validChars += lowercaseChars;
+  } while (input !== 'y' && input !== 'n');
+
+  // An empty string used to store characters used for password.
+    let validChars = '';
+    let password = '';
+
+  // Adding charsets to the validChars string, based on the selected password criteria.
+    if (includeUppercase) {
+      validChars += uppercaseChars;
     }
-   if (includeNumbers) {
-     validChars += numberChars;
+    if (includeLowercase) {
+      validChars += lowercaseChars;
     }
-   if (includeSymbols) {
-     validChars += symbolChars;
+    if (includeNumbers) {
+      validChars += numberChars;
+    }
+    if (includeSymbols) {
+      validChars += symbolChars;
     }
 
-// Ensuring at least one character type is selected.
-   if (validChars === '') {
-     alert('Please choose at least one character type.');
-     return '';
+  // Ensuring at least one character type is selected.
+    if (validChars === '') {
+      alert('Please choose at least one character type.');
+      return
     }
 
-// Password generates via selecting random characters from validChars.
-   for (let i = 0; i < length; i++) {
-     const randomIndex = Math.floor(Math.random() * validChars.length);
-     password += validChars.charAt(randomIndex);
+  // Password generates via selecting random characters from validChars.
+    for (let i = 0; i < lengthInput; i++) {
+      const randomIndex = Math.floor(Math.random() * validChars.length);
+      password += validChars.charAt(randomIndex);
     }
-  return password;
-  }
+    return password;
+    
 }
