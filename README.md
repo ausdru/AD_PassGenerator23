@@ -1,14 +1,14 @@
 ## Password Generator 2023
 
 ## Link
-
+[Link To Live URL](https://ausdru.github.io/AD_PassGenerator23/)
 
 ## Description
 The motivation behind this project was to modify starter code to create an application that enables employees to generate random passwords based on criteria that they’ve selected. The app runs in the browser and features dynamically updated HTML and CSS powered by JavaScript code that I've written. It has a clean, polished, and responsive user interface that adapts to multiple screen sizes.
 
 ## Usage
-![Screenshot1](ss1.png)
-![Screenshot2](ss2.png)
+![Screenshot1](./assets/ss1.png)
+![Screenshot1](./assets/ss2.png)
 
 ## License
 
